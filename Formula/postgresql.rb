@@ -12,6 +12,10 @@ class Postgresql < Formula
     sha256 "6eb005a6b35c7637589733eb2ebd932d5e840023bf71322b1a609909d9035390" => :high_sierra
   end
 
+  option "with-python", "Enable PL/Python3"
+
+  deprecated_option "with-python3" => "with-python"
+
   depends_on "pkg-config" => :build
   depends_on "icu4c"
 
@@ -21,6 +25,7 @@ class Postgresql < Formula
 
   depends_on "openssl@1.1"
   depends_on "readline"
+  depends_on "python" => :optional
   uses_from_macos "libxml2"
   uses_from_macos "libxslt"
   uses_from_macos "perl"
@@ -52,6 +57,11 @@ class Postgresql < Formula
       --with-perl
       --with-uuid=e2fs
     ]
+
+    if build.with?("python")
+      args << "--with-python"
+      ENV["PYTHON"] = which("python3")
+    end
 
     # The CLT is required to build Tcl support on 10.7 and 10.8 because
     # tclConfig.sh is not part of the SDK
