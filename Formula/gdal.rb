@@ -1,15 +1,8 @@
 class Gdal < Formula
   desc "Geospatial Data Abstraction Library"
   homepage "https://www.gdal.org/"
-  url "https://download.osgeo.org/gdal/2.4.2/gdal-2.4.2.tar.xz"
-  sha256 "dcc132e469c5eb76fa4aaff238d32e45a5d947dc5b6c801a123b70045b618e0c"
-  revision 3
-
-  bottle do
-    sha256 "37370723c5db87a87aa05e6601b5ecd91829788770eb3b70b8728483fd42e950" => :catalina
-    sha256 "9409de0723bf4c11a9a50c2c5507dba5bf65f31bb0225b1ddea68abc018f992b" => :mojave
-    sha256 "d59c9ce6d87b049273cd087bc676ce39b7c650153fe6d6bd5f3c46a261e646ca" => :high_sierra
-  end
+  url "https://github.com/OSGeo/gdal/releases/download/v3.0.3/gdal-3.0.3.tar.gz"
+  revision 4
 
   head do
     url "https://github.com/OSGeo/gdal.git"
@@ -102,7 +95,8 @@ class Gdal < Formula
       "--without-libgrass",
       "--without-mysql",
       "--without-perl",
-      "--without-python",
+      "--with-python",
+      "--with-pg"
 
       # Unsupported backends are either proprietary or have no compatible version
       # in Homebrew. Podofo is disabled because Poppler provides the same
